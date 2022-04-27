@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://example.com/api_tutorial/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Getting Started - Sustainabase API Documentation</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Getting Started";
+        var mkdocs_page_input_path = "api_tutorial.md";
+        var mkdocs_page_url = "/api_tutorial/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Sustainabase API Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Welcome</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../api_specs/">Activity Records API Reference</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Getting Started</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#200-ok">200 OK</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#500-internal-server-error">500 Internal Server Error</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Sustainabase API Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Getting Started</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="getting-started">Getting Started</h1>
+<p>The API route is composed of a base URL plus a route path.</p>
+<p>The base URL is:</p>
+<p><code>https://o0cj2w35kc.execute-api.us-east-1.amazonaws.com/prod/activities</code></p>
+<p>Each activity record category is associated with a route path, defined in the API Reference. These route paths </p>
+<p>Each route accepts a list of JSON objects formatted like:</p>
+<pre><code>[
+    {
+        [field name]: [value]
+    },
+    [...]
+]
+</code></pre>
+<p>The list can contain up to 50 activity records for storage.</p>
+<p>For example, a submission of two activity records to scope1/stationary-combustion could look like:</p>
+<pre><code>[
+    {
+        "building_address": "123 Sesame Street",
+        "provider_name": "Big Bird",
+        "account_number": 1234,
+        "date": "4/1/2022",
+        "fuel_type": "propane",
+        "total_amount": 650.00,
+        "unit": "gallons",
+        "total_cost": 567.89
+    },
+    {
+        "building_address": "123 Sesame Street",
+        "provider_name": "Big Bird",
+        "account_number": 1234,
+        "date": "3/1/2022",
+        "fuel_type": "propane",
+        "total_amount": 900.00,
+        "unit": "gallons",
+        "total_cost": 1050.50
+    }
+]
+</code></pre>
+<p>Every required field must be present for data to be landed. Allowed fields may or may not be present. Expected types are strings, integers or floating point decimals. All dates are strings formatted as "MM-DD-YYYY". Required and allowed fields are drawn from "Sustainabase Data Requests_ROMANO-METHOD.xlsx".</p>
+<p>API requests are given an 'Authorization' header with an ID token, to be obtained from the Cognito hosted authentication UI or directly from the Sustainabase team.</p>
+<p>Several responses are possible.</p>
+<h4 id="200-ok">200 OK</h4>
+<p>Everything went well. The body of the response contains information about how many activities were stored and where.</p>
+<h4 id="500-internal-server-error">500 Internal Server Error</h4>
+<p>This means the API resource or data are incomplete in some way, and the activity has not been stored.</p>
+<p>This can happen in case of the following problems with the request:</p>
+<ul>
+<li>Route is not recognized</li>
+<li>Missing required field for category</li>
+<li>Included field not available in category</li>
+<li>Too many records included in request</li>
+</ul>
+<h1 id="tutorials">Tutorials</h1>
+<h3 id="use-case-submitting-scope-1-stationary-combustion-activity-data">Use Case: Submitting Scope 1 - Stationary Combustion activity data</h3>
+<ol>
+<li>Retrieve ID token with Cognito login information.</li>
+<li>
+<p>Sample JSON payload:</p>
+<pre><code>[
+    {
+        "provider_name": "AAA Gas Inc.",
+        "account_number": "12345",
+        "date": "01-01-2021",
+        "fuel_type": "propane",
+        "total_amount": 500.00,
+        "unit": "gallons",
+        "building_address": "Union St, Anywhere, FL",
+        "total_cost": 500.00
+    }
+]
+</code></pre>
+</li>
+<li>
+<p>POST request to:</p>
+</li>
+</ol>
+<p><code>https://o0cj2w35kc.execute-api.us-east-1.amazonaws.com/prod/activities/scope1/stationary-combustion</code></p>
+<ol>
+<li>Successful response:</li>
+</ol>
+<p><code>1 objects placed in scope1/stationary-combustion</code></p>
+<h3 id="use-case-submitting-scope-2-owned-utilities-data">Use Case: Submitting Scope 2 - Owned Utilities data</h3>
+<ol>
+<li>Retrieve ID token with Cognito login information</li>
+<li>
+<p>Sample JSON payload:</p>
+<pre><code>[
+    {
+        "facility_address":"Union St, Anywhere, FL",
+        "provider_name":"Electric Company Inc",
+        "account_number":"11111555555555",
+        "begin_date":"2021-01-01",
+        "end_date":"2021-01-31",
+        "total_amount":50000,
+        "unit":"kWh",
+        "activity_type":"Electricity"
+    }
+]
+</code></pre>
+</li>
+<li>
+<p>POST request to:</p>
+</li>
+</ol>
+<p><code>https://o0cj2w35kc.execute-api.us-east-1.amazonaws.com/prod/activities/scope2/utilities/owned</code></p>
+<ol>
+<li>Successful response:</li>
+</ol>
+<p><code>1 objects placed in scope2/utlities/owned</code></p>
+<h3 id="use-case-submitting-scope-3-purchased-packaging-average-data">Use Case: Submitting Scope 3 - Purchased Packaging - Average data</h3>
+<ol>
+<li>Retrieve ID token with Cognito login information</li>
+<li>
+<p>Sample JSON payload:</p>
+<pre><code>[
+    {
+        "supplier":"ABC Plastics",
+        "packaging_type":"5 oz bottles",
+        "packaging_material":"HDPE",
+        "pct_recycled_content":"0,
+        "other_sustainable_certifications":"None",
+        "date":"2021-01-31",
+        "total_weight":300.00,
+        "unit":"lbs"
+    }
+]
+</code></pre>
+</li>
+<li>
+<p>POST request to:</p>
+</li>
+</ol>
+<p><code>https://o0cj2w35kc.execute-api.us-east-1.amazonaws.com/prod/activities/scope3/purchased-packaging/average-data</code></p>
+<ol>
+<li>Successful response:</li>
+</ol>
+<p><code>1 objects placed in scope3-purchased-packaging/average-data</code></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../api_specs/" class="btn btn-neutral float-left" title="Activity Records API Reference"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../api_specs/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

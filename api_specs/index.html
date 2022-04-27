@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://example.com/api_specs/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Activity Records API Reference - Sustainabase API Documentation</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Activity Records API Reference";
+        var mkdocs_page_input_path = "api_specs.md";
+        var mkdocs_page_url = "/api_specs/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Sustainabase API Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Welcome</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Activity Records API Reference</a>
+    <ul class="current">
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../api_tutorial/">Getting Started</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Sustainabase API Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Activity Records API Reference</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="activity-records-api-reference">Activity Records API Reference</h1>
+<h1 id="valid-api-routes">Valid API routes:</h1>
+<h2 id="scope1stationary-combustion">scope1/stationary-combustion:</h2>
+<pre><code>required: 
+    provider_name [string],
+    account_number [string],
+    date [string],
+    fuel_type [string],
+    total_amount [float],
+    unit [string]
+
+allowed: 
+    building_address [string],
+    total_cost [float]
+</code></pre>
+<h2 id="scope1mobile-combustion">scope1/mobile-combustion:</h2>
+<pre><code>required: 
+    vehicle_type [string],
+    account_number [string],
+    date [string],
+    total_amount [float],
+    fuel_type [string],
+    unit [string]
+
+allowed: 
+    total_cost [float]
+</code></pre>
+<h2 id="scope1fugitive-emissionspurchased-gases-data">scope1/fugitive-emissions/purchased-gases-data:</h2>
+<pre><code>required: 
+    refrigerant_type [string],
+    total_amount [float],
+    unit [string]
+
+allowed: 
+    year [integer],
+    total_cost [float]
+</code></pre>
+<h2 id="scope1fugitive-emissionssimplified-material-balance-data">scope1/fugitive-emissions/simplified-material-balance-data:</h2>
+<pre><code>required: 
+    refrigerant_type [string],
+    new_units_charge [float],
+    new_units_capacity [float],
+    existing_units_recharge [float],
+    disposed_units_capacity [float],
+    disposed_units_recovered [float]
+
+allowed: 
+    year [integer],
+    new_units_charge_unit [string],
+    new_units_capacity_unit [string],
+    existing_units_recharge_unit [string],
+    disposed_units_capacity_unit [string],
+    disposed_units_recovered_unit [string]
+</code></pre>
+<h2 id="scope1fugitive-emissionsscreening-data">scope1/fugitive-emissions/screening-data:</h2>
+<pre><code>required: 
+    type_of_equipment [string],
+    refrigerant_type [string]
+
+allowed: 
+    manufacturer [string],
+    model_number [string],
+    new_units_charge [float],
+    new_units_charge_unit [string],
+    existing_units_refrigerant_capacity [float],
+    existing_units_refrigerant_capacity_unit [string],
+    existing_units_months_in_used [float],
+    disposed_units_refrigerant_capacity [float],
+    disposed_units_refrigerant_capacity_unit [string],
+    disposed_units_months_in_use [float]
+</code></pre>
+<h2 id="scope2utilitiesowned">scope2/utilities/owned:</h2>
+<pre><code>required: 
+    facility_address [string],
+    provider_name [string],
+    account_number [string],
+    begin_date [string],
+    end_date [string],
+    total_amount [float],
+    unit [string],
+    activity_type [string]
+
+allowed: 
+    total_cost [float]
+</code></pre>
+<h2 id="scope2utilitiesleased">scope2/utilities/leased:</h2>
+<pre><code>required: 
+    facility_address [string],
+    pct_occupied [float],
+    begin_date [string],
+    end_date [string],
+    total_amount [float],
+    unit [string],
+    activity_type [string]
+
+allowed: 
+    provider_name [string],
+    account_number [string],
+    total_cost [float]
+</code></pre>
+<h2 id="scope3waste">scope3/waste:</h2>
+<pre><code>required:
+    provider [string],
+    account_number [string],
+    date [string],
+    waste_type [string],
+    disposal_method [string],
+    total_amount [float],
+    unit [string]
+
+allowed: 
+    total_cost [float]
+</code></pre>
+<h2 id="scope3transportation-and-distribution">scope3/transportation-and-distribution:</h2>
+<pre><code>required: 
+    supplier_or_customer [string],
+    mode_of_transport [string],
+    date [string],
+    begin_point [string],
+    end_point [string],
+    total_weight [float],
+    weight_unit [string]
+
+allowed: 
+    vehicle_type [string],
+    total_cost [float]
+</code></pre>
+<h2 id="scope3purchased-packagingaverage-data">scope3/purchased-packaging/average-data:</h2>
+<pre><code>required: 
+    supplier [string],
+    packaging_type [string],
+    packaging_material [string],
+    pct_recycled_content [float],
+    other_sustainable_certifications [string],
+    date [string],
+    total_weight [float],
+    unit [string]
+
+allowed: 
+    total_cost [float]
+</code></pre>
+<h2 id="scope3purchased-packagingaverage-data-using-key">scope3/purchased-packaging/average-data-using-key:</h2>
+<pre><code>required: 
+    sku [string],
+    product_name [string],
+    supplier [string],
+    primary_packaging_type [string],
+    primary_packaging_material [string],
+    primary_packaging_weight [float],
+    primary_packaging_pct_recycled_content [float],
+    primary_packaging_sustainable_certs [string]
+
+allowed: 
+    primary_packaging_unit [string],
+    secondary_packaging_type [string],
+    secondary_packaging_material [string],
+    secondary_packaging_weight [float],
+    secondary_packaging_unit [string],
+    tertiary_packaging_type [string],
+    tertiary_packaging_material [string],
+    tertiary_packaging_weight [float],
+    tertiary_packaging_unit [string]
+</code></pre>
+<h2 id="scope3purchased-packagingspend-data">scope3/purchased-packaging/spend-data:</h2>
+<pre><code>required: 
+    supplier [string],
+    packaging_type [string],
+    packaging_material [string],
+    date [string],
+    total_cost [float]
+
+allowed: 
+    # All allowed fields are required
+</code></pre>
+<h2 id="scope3purchased-ingredientsaverage-data">scope3/purchased-ingredients/average-data:</h2>
+<pre><code>required: 
+    supplier [string],
+    ingredient_name [string],
+    country_of_origin [string],
+    date [string],
+    total_weight [float],
+    unit [string]
+
+allowed: 
+    total_cost [float]
+</code></pre>
+<h2 id="scope3purchased-ingredientsaverage-component-data-using-key">scope3/purchased-ingredients/average-component-data-using-key:</h2>
+<pre><code>required: 
+    sku [string],
+    component_name [string],
+    primary_ingredient_name [string],
+    primary_ingredient_weight [float],
+    primary_ingredient_unit [string]
+
+allowed: 
+    secondary_ingredient_name [string],
+    secondary_ingredient_weight [float],
+    secondary_ingredient_unit [string],
+    other_ingredient_name [string],
+    other_ingredient_weight [float],
+    other_ingredient_unit [string]
+</code></pre>
+<h2 id="scope3purchased-ingredientsaverage-product-data-using-key">scope3/purchased-ingredients/average-product-data-using-key:</h2>
+<pre><code>required: 
+    sku [string],
+    product_name [string],
+    primary_ingredient_name [string],
+    primary_ingredient_weight [float],
+    primary_ingredient_unit [string]
+
+allowed: 
+    secondary_ingredient_name [string],
+    secondary_ingredient_weight [float],
+    secondary_ingredient_unit [string],
+    other_ingredient_name [string],
+    other_ingredient_weight [float],
+    other_ingredient_unit [string]
+</code></pre>
+<h2 id="scope3purchased-ingredientsspend-data">scope3/purchased-ingredients/spend-data:</h2>
+<pre><code>required: 
+    supplier [string],
+    ingredient_name [string],
+    date [string],
+    total_cost [float]
+
+allowed: 
+    # All allowed fields are required
+</code></pre>
+<h2 id="scope3contract-manufacturers">scope3/contract-manufacturers:</h2>
+<pre><code>required: 
+    cmo_name [string],
+    year [integer],
+    total_cost [float]
+
+allowed: 
+    # All allowed fields are required
+</code></pre>
+<h2 id="scope3business-traveldistance-data">scope3/business-travel/distance-data:</h2>
+<pre><code>required: 
+    method_of_travel [string],
+    date [string],
+    total_distance_traveled [float],
+    unit [string]
+
+allowed: 
+    employee_id [string],
+    total_cost [float]
+</code></pre>
+<h2 id="scope3business-travelbegin-end-data">scope3/business-travel/begin-end-data:</h2>
+<pre><code>required: 
+    method_of_travel [string],
+    date [string],
+    begin_location [string],
+    end_location [string],
+
+allowed: 
+    employee_id [string],
+    total_cost [float]
+</code></pre>
+<h2 id="scope3business-travelspend-data">scope3/business-travel/spend-data:</h2>
+<pre><code>required: 
+    method_of_travel [string],
+    date [string],
+    total_cost [float]
+
+allowed: 
+    # All allowed fields are required
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Welcome"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../api_tutorial/" class="btn btn-neutral float-right" title="Getting Started">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../api_tutorial/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
